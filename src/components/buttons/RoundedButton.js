@@ -16,7 +16,7 @@ export default class RoundedButton extends Component {
                 style={[{backgroundColor}, styles.wrapper]}
                 onPress={handleOnPress}    
             >  
-                <View>
+                <View style={styles.buttonTextWrapper}>
                     {icon}
                     <Text style={[{color},styles.buttonText]}>{text}</Text>
                 </View> 
@@ -39,7 +39,13 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         padding: 15,
         borderWidth: 1,
-        borderColor: colors.white
+        borderColor: colors.white,
+        marginBottom: 15,
+        alignItems: 'center'
+    },
+    buttonTextWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
     },
     buttonText: {
         fontSize: 17,
