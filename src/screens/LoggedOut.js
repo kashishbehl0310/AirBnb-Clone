@@ -5,6 +5,7 @@ import {Platform,
         Text, 
         View,
         Image} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import RoundedButton from '../components/buttons/RoundedButton'
 
 export default class LoggedOut extends Component {
@@ -14,7 +15,12 @@ export default class LoggedOut extends Component {
             <View style={styles.welcomeWrapper}>
                 <Image source={require('../img/airbnb-logo.png')} style={styles.logo}  />
                 <Text style={styles.welcomeText}>Welcome to AirBbnb !</Text>
-                <RoundedButton />
+                <RoundedButton 
+                    text="Continue wit Facebook" 
+                    color={colors.green01} 
+                    backgroundColor={colors.white} 
+                    icon={<Icon name="facebook" size={20} style={styles.facebookButton} />}
+                    />
             </View>
         </View>
     )
@@ -44,5 +50,8 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '300',
         marginBottom: 40
+    },
+    facebookButton: {
+
     }
 })
