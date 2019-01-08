@@ -9,9 +9,13 @@ import {
     StyleSheet
 } from "react-native";
 import colors from '../styles/colors';
-import InputField from '../components/forms/InputField'
+import InputField from '../components/forms/InputField';
+import NextArrowButton from '../components/buttons/NextArrowButton';
 
 export default class Login extends Component{
+    handleNextButton(){
+        alert('Next Button pressed')
+    }
     render(){
         return(
             <KeyboardAvoidingView style={styles.wrapper}>
@@ -24,6 +28,8 @@ export default class Login extends Component{
                             labelColor={colors.white}
                             textColor={colors.white}
                             borderBottomColor={colors.white}
+                            inputType="email"
+                            customStyle={{marginBottom: 30}}
                         />
                         <InputField 
                             labelText="Password"
@@ -31,8 +37,15 @@ export default class Login extends Component{
                             labelColor={colors.white}
                             textColor={colors.white}
                             borderBottomColor={colors.white}
+                            inputType="password"
+                            customStyle={{marginBottom: 30}}
                         />
                     </ScrollView>
+                </View>
+                <View style={styles.nextButton}>
+                    <NextArrowButton 
+                        handleNextButton={this.handleNextButton}
+                    />
                 </View>
             </KeyboardAvoidingView>
         )
@@ -60,5 +73,10 @@ const styles = StyleSheet.create({
         fontWeight: '100',
         marginBottom: 30,
         color: colors.white
+    },
+    nextButton: {
+        alignItems: 'flex-end',
+        right: 20,
+        bottom:20
     }
 })
