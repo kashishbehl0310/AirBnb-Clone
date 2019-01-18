@@ -14,6 +14,12 @@ import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notifications from '../components/Notifications'
 
 export default class Login extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            formValid: false
+        }
+    }
     handleNextButton(){
         alert('Next Button pressed')
     }
@@ -21,6 +27,8 @@ export default class Login extends Component{
         alert('Closing')
     }
     render(){
+        const { formValid } = this.state;
+        const showNotification = formValid ? false : true
         return(
             <KeyboardAvoidingView 
                 style={styles.wrapper}
@@ -54,7 +62,7 @@ export default class Login extends Component{
                     </View>
                     <View>
                         <Notifications
-                            showNotification={true}
+                            showNotification={showNotification}
                             handleCloseNotification={this.handleCloseNotification}
                             type="Error"
                             firstLine="The credentials don't look right."

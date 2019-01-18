@@ -6,17 +6,45 @@ import {
     View,
     Text,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    Easing,
+    Animated
 } from "react-native";
 
 export default class Notifications extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            positionValue = new Animated.Value(60)
+        }
+        this.closeNotification = this.closeNotification.bind(this)
+    }
+
+    animateNotification(value){
+        const { positionValue } = this.state;
+        Animated.timing(
+            positionValue,
+            {
+                toValue: value,
+                duration: 400,
+                velocity: 3,
+                tension: 2,
+                friction: 8,
+                easing: Easing.easeOutBack
+            }
+        )
+    }
+
     closeNotification(){
         this.props.handleCloseNotification()
     }
     render(){
-        const { type, firstLine, secondLine } = this.props;
+        const { type, firstLine, secondLine, showNotification } = this.props;
+        const { positionValue } = this.state;
+        alert(showNotification)
+        showNotification ? this.animateNotification(0) : this.animateNotification(60)
         return(
-            <View style={styles.wrapper}>
+            <Animated.View style={[{transform: [{translateY: positionValue}]}, styles.wrapper]}>
                 <View style={styles.notificationContent}>
                     <Text style={styles.errorText}>{type}</Text>
                     <Text style={styles.errorMessage}>{firstLine}</Text>
@@ -24,6 +52,7 @@ export default class Notifications extends React.Component{
                 </View>
                 <TouchableOpacity
                     style={styles.closeButton}
+                    onPress={this.closeNotification}
                 >
                     <Icon 
                         name="times"
@@ -31,12 +60,12 @@ export default class Notifications extends React.Component{
                         color={colors.lightGrey}
                     />
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
         )
     }
 }
 
-Notifications.PropTypes = {
+Notifications.PropTypes = { 
     showNotification: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     firstLine: PropTypes.string,
@@ -63,7 +92,7 @@ const styles = StyleSheet.create({
         marginBottom: 2
     },
     errorMessage: {
-        marginBottom: 2,
+        marginBottom: 20,
         fontSize: 14
     },
     closeButton: {
