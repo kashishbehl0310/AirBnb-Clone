@@ -11,10 +11,14 @@ import {
 import colors from '../styles/colors';
 import InputField from '../components/forms/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
+import Notifications from '../components/Notifications'
 
 export default class Login extends Component{
     handleNextButton(){
         alert('Next Button pressed')
+    }
+    handleCloseNotification(){
+        alert('Closing')
     }
     render(){
         return(
@@ -47,6 +51,15 @@ export default class Login extends Component{
                         <NextArrowButton 
                             handleNextButton={this.handleNextButton}
                         />
+                    </View>
+                    <View>
+                        <Notifications
+                            showNotification={true}
+                            handleCloseNotification={this.handleCloseNotification}
+                            type="Error"
+                            firstLine="The credentials don't look right."
+                            secondLine="Please try again."
+                        /> 
                     </View>
                 </View>
             </KeyboardAvoidingView>
