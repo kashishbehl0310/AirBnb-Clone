@@ -18,6 +18,7 @@ export default class Notifications extends React.Component{
             positionValue = new Animated.Value(60)
         }
         this.closeNotification = this.closeNotification.bind(this)
+        this.animateNotification = this.animateNotification.bind(this)
     }
 
     animateNotification(value){
@@ -32,7 +33,7 @@ export default class Notifications extends React.Component{
                 friction: 8,
                 easing: Easing.easeOutBack
             }
-        )
+        ).start()
     }
 
     closeNotification(){

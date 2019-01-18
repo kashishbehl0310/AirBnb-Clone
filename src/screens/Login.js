@@ -19,19 +19,23 @@ export default class Login extends Component{
         this.state = {
             formValid: false
         }
+        this.handleCloseNotification = this.handleCloseNotification.bind(this)
     }
     handleNextButton(){
         alert('Next Button pressed')
     }
     handleCloseNotification(){
-        alert('Closing')
+        this.setState({
+            formValid: true
+        })
     }
     render(){
         const { formValid } = this.state;
-        const showNotification = formValid ? false : true
+        const showNotification = formValid ? false : true;
+        const background = formValid ? colors.green01 : colors.darkOrange
         return(
             <KeyboardAvoidingView 
-                style={styles.wrapper}
+                style={[{backgroundColor: background}, styles.wrapper]}
                 >
                 <View style={styles.scrollViewWrapper}>
                     <ScrollView style={styles.scrollView}>
@@ -60,7 +64,7 @@ export default class Login extends Component{
                             handleNextButton={this.handleNextButton}
                         />
                     </View>
-                    <View>
+                    <View style={showNotification ? {marginTop: 10} : {}}>
                         <Notifications
                             showNotification={showNotification}
                             handleCloseNotification={this.handleCloseNotification}
@@ -78,8 +82,7 @@ export default class Login extends Component{
 const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
-        flex: 1,
-        backgroundColor: colors.green01
+        flex: 1
     },
     scrollViewWrapper: {
         marginTop: 70,
