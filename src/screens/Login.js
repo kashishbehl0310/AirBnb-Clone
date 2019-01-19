@@ -24,15 +24,14 @@ export default class Login extends Component{
     handleNextButton(){
         alert('Next Button pressed')
     }
-    handleCloseNotification(){
-        this.setState({
-            formValid: true
-        })
-    }
+    handleCloseNotification() {
+        this.setState({ formValid: true });
+      }
     render(){
         const { formValid } = this.state;
         const showNotification = formValid ? false : true;
         const background = formValid ? colors.green01 : colors.darkOrange
+        const notificationMarginBottom = showNotification ? 0 : 0;
         return(
             <KeyboardAvoidingView 
                 style={[{backgroundColor: background}, styles.wrapper]}
@@ -64,14 +63,14 @@ export default class Login extends Component{
                             handleNextButton={this.handleNextButton}
                         />
                     </View>
-                    <View style={showNotification ? {marginTop: 10} : {}}>
+                    <View style={[styles.notificationWrapper, {marginBottom: notificationMarginBottom, height: 60}]}>
                         <Notifications
                             showNotification={showNotification}
                             handleCloseNotification={this.handleCloseNotification}
-                            type="Error"
-                            firstLine="The credentials don't look right."
+                            type="Error!"
+                            firstLine="Those credentials don't look right."
                             secondLine="Please try again."
-                        /> 
+                    />
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -104,5 +103,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         right: 20,
         bottom:20
+    },
+    notificationWrapper: {
+
     }
 })
