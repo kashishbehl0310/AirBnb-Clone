@@ -17,7 +17,10 @@ export default class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
-            formValid: false
+            formValid: false,
+            validEmail: false,
+            emailAddress: '',
+            validPassword: false
         }
         this.handleCloseNotification = this.handleCloseNotification.bind(this)
     }
@@ -26,7 +29,20 @@ export default class Login extends Component{
     }
     handleCloseNotification() {
         this.setState({ formValid: true });
-      }
+    }
+    handleEmalChange(email){
+        const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        this.setState({ emailAddress :email})
+        if(!this.state.validEmail){
+            if(emailCheckRegex.test(email)){
+                this.setState({ validEmail: true})
+            }
+        } else {
+            if(!emailCheckRegex.test(email)){
+                this.setState({ validEmail: false})
+            }
+        }
+    }
     render(){
         const { formValid } = this.state;
         const showNotification = formValid ? false : true;
@@ -47,6 +63,7 @@ export default class Login extends Component{
                             borderBottomColor={colors.white}
                             inputType="email"
                             customStyle={{marginBottom: 30}}
+                            onChangeText={this.handleEmalChange}
                         />
                         <InputField 
                             labelText="Password"
@@ -105,6 +122,7 @@ const styles = StyleSheet.create({
         bottom:20
     },
     notificationWrapper: {
-
+        zIndex: 9,
+        bottom: 0
     }
 })

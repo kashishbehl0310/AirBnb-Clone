@@ -56,10 +56,10 @@ export default class Notification extends Component {
         <Text>
           {firstLine}
         </Text>
+        <Text style={styles.errorMessage}>
+          {secondLine}
+        </Text>
       </View>
-      <Text style={styles.errorMessage}>
-        {secondLine}
-      </Text>
     </View>
       <TouchableOpacity
         style={styles.closeButton}
