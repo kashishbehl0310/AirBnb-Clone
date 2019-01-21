@@ -29,7 +29,8 @@ export default class Login extends Component{
         this.toggleNextButtonState = this.toggleNextButtonState.bind(this)
     }
     handleNextButton(){
-        if(this.state.emailAddress === 'hello@imandy.ie'){
+        if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword){
+            alert('success')
             this.setState({
                 formValid: true
             })
@@ -100,6 +101,7 @@ export default class Login extends Component{
                             borderBottomColor={colors.white}
                             inputType="password"
                             customStyle={{marginBottom: 30}}
+                            onChangeText={this.handlePasswordChange}
                         />
                     </ScrollView>
                     <View style={styles.nextButton}>
