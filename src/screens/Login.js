@@ -5,12 +5,17 @@ import {
     View,
     ScrollView,
     StyleSheet,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
  } from "react-native";
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import InputField from "../components/forms/InputField";
+import NextArrowButton from '../components/buttons/NextArrowButton';
 
 export default class Login extends Component {
+    handleNextButon(){
+        alert('Next Button Pressed')
+    }
     render(){
         return(
             <KeyboardAvoidingView
@@ -19,7 +24,30 @@ export default class Login extends Component {
                 <View style={styles.scrollViewWrapper}>
                     <ScrollView style={styles.scrollView}>
                         <Text style={styles.logginHeader}>Log In</Text>
+                        <InputField 
+                            labelText="EMAIL ADDRESS"
+                            labelTextSize={14}
+                            labelColor={colors.white}
+                            textColor={colors.white}
+                            borderBottomColor={colors.white}
+                            inputType="email"
+                            customStyle={{marginBottom: 30}}
+                        />
+                        <InputField 
+                            labelText="PASSWORD"
+                            labelTextSize={14}
+                            labelColor={colors.white}
+                            textColor={colors.white}
+                            borderBottomColor={colors.white}
+                            inputType="password"
+                            customStyle={{marginBottom: 30}}
+                        />
                     </ScrollView>
+                </View>
+                <View style={styles.nextButton}>
+                    <NextArrowButton 
+                        handleNextButon={this.handleNextButon}
+                    />
                 </View>
             </KeyboardAvoidingView>
         )
@@ -37,14 +65,19 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingTop: 20,
-        paddingRight: 20,
-        paddingLeft: 20,
+        paddingRight: 30,
+        paddingLeft: 30,
         flex: 1
     },
     logginHeader: {
-        fontSize: 28,
+        fontSize: 34,
         color: colors.green01,
-        fontWeight: '200',
-        marginBottom: 30
+        fontWeight: '300',
+        marginBottom: 40
+    },
+    nextButton: {
+        alignItems: 'flex-end',
+        right: 20,
+        bottom: 20
     }
 })
