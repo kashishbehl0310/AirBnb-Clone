@@ -43,11 +43,11 @@ export default class Login extends Component {
                             customStyle={{marginBottom: 30}}
                         />
                     </ScrollView>
-                </View>
-                <View style={styles.nextButton}>
-                    <NextArrowButton 
-                        handleNextButon={this.handleNextButon}
-                    />
+                    <View style={styles.nextButton}>
+                        <NextArrowButton 
+                            handleNextButon={this.handleNextButon}
+                        />
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         )
@@ -57,7 +57,8 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
-        flex: 1
+        flex: 1,
+        backgroundColor: colors.green01
     },
     scrollViewWrapper: {
         marginTop:70,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     },
     logginHeader: {
         fontSize: 34,
-        color: colors.green01,
+        color: colors.white,
         fontWeight: '300',
         marginBottom: 40
     },

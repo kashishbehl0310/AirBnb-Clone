@@ -9,10 +9,13 @@ import colors from '../../styles/colors';
 
 export default class NextArrowButton extends Component{
     render(){
-        const { disabled } = this.props;
+        const { disabled, handleNextButon } = this.props;
         const opacityStyle = disabled ? { backgroundColor: 'rgba(255,255,255,0.2)' } : { backgroundColor: 'rgba(255,255,255,0.6)' }
         return(
-            <TouchableHighlight style={[opacityStyle, styles.button]}>
+            <TouchableHighlight 
+                style={[opacityStyle, styles.button]}
+                onPress={handleNextButon}
+            >
                 <Icon 
                     name="angle-right"
                     color={colors.green01}
@@ -24,13 +27,18 @@ export default class NextArrowButton extends Component{
     }
 }
 
+NextArrowButton.PropTypes = {
+    disabled: PropTypes.bool,
+    handleNextButton: PropTypes.func
+}
+
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        justiyContent: 'center',
+        justifyContent: 'center',
         borderRadius: 50,
-        width: 60,
-        height: 60
+        width: 50,
+        height: 50
     },
     icon: {
         marginRight: -2,
