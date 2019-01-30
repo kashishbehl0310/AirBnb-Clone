@@ -11,10 +11,14 @@ import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import InputField from "../components/forms/InputField";
 import NextArrowButton from '../components/buttons/NextArrowButton';
+import Notification from '../components/Notification'
 
 export default class Login extends Component {
     handleNextButon(){
         alert('Next Button Pressed')
+    }
+    handleCloseNotification(){
+        alert('closed')
     }
     render(){
         return(
@@ -46,6 +50,15 @@ export default class Login extends Component {
                     <View style={styles.nextButton}>
                         <NextArrowButton 
                             handleNextButon={this.handleNextButon}
+                        />
+                    </View>
+                    <View>
+                        <Notification 
+                            showNotification={true}
+                            handleCloseNotification={this.handleCloseNotification}
+                            type="Error"
+                            firstLine="These credentials don't look right."
+                            secondLine="Please try again."
                         />
                     </View>
                 </View>
