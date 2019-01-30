@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { 
     View,
@@ -18,23 +18,31 @@ export default class Notification extends Component {
             positionValue: new Animated.Value(60)
         }
         this.onCloseNotification = this.onCloseNotification.bind(this);
+        this.animateNotification = this.animateNotification.bind(this);
     }
-    showNotification(){
+    animateNotification(value){
         const { positionValue } = this.state;
         Animated.timing(
             positionValue,
             {
-                
+                toValue: value,
+                duration: 400,
+                velocity: 3,
+                tension: 2,
+                friction: 8,
+                easing: Easing.easeOutBack
             }
-        )
+        ).start();
     }
     onCloseNotification(){
         this.props.handleCloseNotification()
     }
     render(){
-        const { type, firstLine, secondLine } = this.props;
+        const { type, firstLine, secondLine, showNotification } = this.props;
+        showNotification ? this.animateNotification(0) : this.animateNotification(60)
+        const { positionValue } = this.state;
         return(
-            <View style={styles.wrapper}>
+            <Animated.View style={[{transform: [{ translateY: positionValue}]}, styles.wrapper]}>
                 <View style={styles.notificationContent}>
                     <Text style={styles.errorText}>{type}</Text>
                     <Text style={styles.errorMessage}>{firstLine}</Text>
@@ -50,17 +58,17 @@ export default class Notification extends Component {
                         color={colors.lightGrey}
                     /> 
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
         )
     }
 }   
 
-Notification.PropTypes = {
-    showNotification: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    firstLine: PropTypes.string,
-    secondLine: PropTypes.string,
-    handleCloseNotification: PropTypes.func
+Notification.propTypes = {
+    showNotification: propTypes.bool.isRequired,
+    type: propTypes.string.isRequired,
+    firstLine: propTypes.string,
+    secondLine: propTypes.string,
+    handleCloseNotification: propTypes.func
 }
 
 const styles = StyleSheet.create({

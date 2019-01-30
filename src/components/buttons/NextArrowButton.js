@@ -1,5 +1,5 @@
 import React , { Component } from "react";
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { 
     TouchableHighlight,
     StyleSheet
@@ -27,9 +27,9 @@ export default class NextArrowButton extends Component{
     }
 }
 
-NextArrowButton.PropTypes = {
-    disabled: PropTypes.bool,
-    handleNextButton: PropTypes.func
+NextArrowButton.propTypes = {
+    disabled: propTypes.bool,
+    handleNextButton: propTypes.func
 }
 
 const styles = StyleSheet.create({

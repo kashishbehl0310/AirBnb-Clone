@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { 
     Text,
     View,
@@ -36,12 +36,12 @@ export default class RoundButton extends Component {
     }
 }
 
-RoundButton.PropTypes = {
-    text: PropTypes.string.isRequired,
-    color: PropTypes.string,
-    background: PropTypes.string,
-    icon: PropTypes.object,
-    handleOnPress: PropTypes.func.isRequired
+RoundButton.propTypes = {
+    text: propTypes.string.isRequired,
+    color: propTypes.string,
+    background: propTypes.string,
+    icon: propTypes.object,
+    handleOnPress: propTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import { 
     View,
     StyleSheet,
@@ -62,14 +62,14 @@ export default class InputField extends Component{
     }
 }
 
-InputField.PropTypes = {
-    labelText: PropTypes.string.isRequired,
-    labelTextSize: PropTypes.number,
-    labelColor: PropTypes.string,
-    textColor: PropTypes.string,
-    borderBottomColor: PropTypes.string,
-    inputType: PropTypes.string.isRequired,
-    customStyle: PropTypes.object
+InputField.propTypes = {
+    labelText: propTypes.string.isRequired,
+    labelTextSize: propTypes.number,
+    labelColor: propTypes.string,
+    textColor: propTypes.string,
+    borderBottomColor: propTypes.string,
+    inputType: propTypes.string.isRequired,
+    customStyle: propTypes.object
 }
 
 const styles = StyleSheet.create({
