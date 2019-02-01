@@ -31,7 +31,8 @@ export default class InputField extends Component{
             textColor, 
             borderBottomColor, 
             inputType,
-            customStyle
+            customStyle,
+            onChangeText
         } = this.props;
         const { secureInput } = this.state;
         const fontSize = labelTextSize || 14;
@@ -56,6 +57,7 @@ export default class InputField extends Component{
                     autoCorrect={false}
                     style={[{color: inputColor, borderBottomColor: borderBottom},styles.inputField]}
                     secureTextEntry={secureInput}
+                    onChangeText={onChangeText}
                 />
             </View>
         )
@@ -69,7 +71,8 @@ InputField.propTypes = {
     textColor: propTypes.string,
     borderBottomColor: propTypes.string,
     inputType: propTypes.string.isRequired,
-    customStyle: propTypes.object
+    customStyle: propTypes.object,
+    onChangeText: propTypes.func
 }
 
 const styles = StyleSheet.create({
