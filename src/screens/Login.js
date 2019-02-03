@@ -17,17 +17,20 @@ export default class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            formValid :false,
+            formValid :true,
             validEmail: false,
             emailAddress: '',
             validPassword: false
         }
         this.handleCloseNotification = this.handleCloseNotification.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleNextButon = this.handleNextButon.bind(this);
+        this.toggleNextButton = this.toggleNextButton.bind(this);
     }
     handleNextButon(){
-        if(this.state.emailAddress === 'hello@imandy.ie') {
+        if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
+            alert('success')
             this.setState({
                 formValid:  true
             })
@@ -59,6 +62,27 @@ export default class Login extends Component {
             }
         }
     }   
+    handlePasswordChange(password){
+        if(!this.state.validPassword){
+            if(password.length > 4){
+                this.setState({
+                    validPassword: true
+                })
+            } else if (password.length <= 4){
+                this.setState({
+                    validPassword: false
+                })
+            }
+        }
+    }
+
+    toggleNextButton(){
+        const  { validEmail, validPassword } = this.state;
+        if(validEmail && validPassword){
+            return false;
+        }
+        return true;
+    }
     render(){
         const { formValid } = this.state;
         const showNotification = formValid ? false : true;
@@ -79,7 +103,7 @@ export default class Login extends Component {
                             borderBottomColor={colors.white}
                             inputType="email"
                             customStyle={{marginBottom: 30}}
-                            onChangeText6={this.handleEmailChange}
+                            onChangeText={this.handleEmailChange}
                         />
                         <InputField 
                             labelText="PASSWORD"
@@ -89,11 +113,13 @@ export default class Login extends Component {
                             borderBottomColor={colors.white}
                             inputType="password"
                             customStyle={{marginBottom: 30}}
+                            onChangeText={this.handlePasswordChange}
                         />
                     </ScrollView>
                     <View style={styles.nextButton}>
                         <NextArrowButton 
                             handleNextButon={this.handleNextButon}
+                            disabled={this.toggleNextButton()}
                         />
                     </View>
                     <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
