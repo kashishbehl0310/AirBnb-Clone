@@ -11,7 +11,8 @@ import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import InputField from "../components/forms/InputField";
 import NextArrowButton from '../components/buttons/NextArrowButton';
-import Notification from '../components/Notification'
+import Notification from '../components/Notification';
+import Loader from '../components/Loader';
 
 export default class Login extends Component {
     constructor(props){
@@ -132,6 +133,10 @@ export default class Login extends Component {
                         />
                     </View>
                 </View>
+                <Loader 
+                    animationType="fade"
+                    visible={true}
+                />
             </KeyboardAvoidingView>
         )
     }
