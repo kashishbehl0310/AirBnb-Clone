@@ -21,7 +21,8 @@ export default class Login extends Component {
             formValid :true,
             validEmail: false,
             emailAddress: '',
-            validPassword: false
+            validPassword: false,
+            loadingVisible: false
         }
         this.handleCloseNotification = this.handleCloseNotification.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -30,16 +31,22 @@ export default class Login extends Component {
         this.toggleNextButton = this.toggleNextButton.bind(this);
     }
     handleNextButon(){
-        if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
-            alert('success')
-            this.setState({
-                formValid:  true
-            })
-        } else {
-            this.setState({
-                formValid: false
-            })
-        }
+        this.setState({
+            loadingVisible: true
+        })
+        setTimeout(() => {
+            if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
+                this.setState({
+                    formValid:  true,
+                    loadingVisible: false
+                })
+            } else {
+                this.setState({
+                    formValid: false,
+                    loadingVisible: false
+                })
+            }
+        }, 2000)
     }
     handleCloseNotification(){
         this.setState({
@@ -85,10 +92,10 @@ export default class Login extends Component {
         return true;
     }
     render(){
-        const { formValid } = this.state;
+        const { formValid, loadingVisible, validEmail, validPassword } = this.state;
         const showNotification = formValid ? false : true;
         const background = formValid ? colors.green01 : colors.darkOrange;
-        const notificationMarginTop = showNotification ? 10: 0
+        const notificationMarginTop = showNotification ? 10: 0;
         return(
             <KeyboardAvoidingView
                 style={[{backgroundColor: background}, styles.wrapper]}
@@ -105,6 +112,7 @@ export default class Login extends Component {
                             inputType="email"
                             customStyle={{marginBottom: 30}}
                             onChangeText={this.handleEmailChange}
+                            showCheckMark={validEmail}
                         />
                         <InputField 
                             labelText="PASSWORD"
@@ -115,6 +123,7 @@ export default class Login extends Component {
                             inputType="password"
                             customStyle={{marginBottom: 30}}
                             onChangeText={this.handlePasswordChange}
+                            showCheckMark={validPassword}
                         />
                     </ScrollView>
                     <View style={styles.nextButton}>
@@ -135,7 +144,7 @@ export default class Login extends Component {
                 </View>
                 <Loader 
                     animationType="fade"
-                    visible={true}
+                    visible={loadingVisible}
                 />
             </KeyboardAvoidingView>
         )
