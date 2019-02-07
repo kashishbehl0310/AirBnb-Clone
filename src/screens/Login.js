@@ -112,7 +112,8 @@ export default class Login extends Component {
                             inputType="email"
                             customStyle={{marginBottom: 30}}
                             onChangeText={this.handleEmailChange}
-                            showCheckMark={validEmail}
+                            showCheckmark={validEmail}
+                            autoFocus={true}
                         />
                         <InputField 
                             labelText="PASSWORD"
@@ -123,7 +124,7 @@ export default class Login extends Component {
                             inputType="password"
                             customStyle={{marginBottom: 30}}
                             onChangeText={this.handlePasswordChange}
-                            showCheckMark={validPassword}
+                            showCheckmark={validPassword}
                         />
                     </ScrollView>
                     <View style={styles.nextButton}>
