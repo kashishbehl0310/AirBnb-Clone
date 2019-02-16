@@ -3,7 +3,8 @@ import {
     Text,
     View,
     KeyboardAvoidingView,
-    StyleSheet
+    StyleSheet,
+    ScrollView
  } from "react-native";
 import colors from '../styles/colors';
 import NextArrowButton from "../components/buttons/NextArrowButton";
@@ -74,7 +75,8 @@ export default class ForgotPassword extends Component{
             <KeyboardAvoidingView
                 style={[{backgroundColor: background},styles.wrapper]}
             >
-                <View style={styles.form}>
+            <View style={styles.scrollViewWrapper}>
+                <ScrollView style={styles.scrollView}>
                     <Text style={styles.forgotPasswordHeading}>Forgot your password</Text>
                     <Text style={styles.forgotPasswordSubHeading}>Enter your email to reset your password</Text>
                     <InputField 
@@ -88,27 +90,26 @@ export default class ForgotPassword extends Component{
                         onChangeText={this.handleInputChange}
                         showCheckmark={validEmail}
                     />
-                </View>
-                <View>
-                    <View style={styles.nextButton}>
-                        <NextArrowButton 
-                            handleNextButon={this.goToNextStep}
-                            disabled={!validEmail}
-                        />
-                    </View>
-                    <View>
-                        <Notification 
-                            showNotification = {showNotification}
-                            handleCloseNotification={this.handleCloseNotification}  
-                            type="Error"
-                            firstLine="No account exists for that email"                          
-                        />
-                    </View>
-                    <Loader 
-                        visible={loadingVisible}
-                        animationType="fade"
+                </ScrollView>
+                <View style={styles.nextButton}>
+                    <NextArrowButton 
+                        handleNextButon={this.goToNextStep}
+                        disabled={!validEmail}
                     />
                 </View>
+                <View>
+                    <Notification 
+                        showNotification = {showNotification}
+                        handleCloseNotification={this.handleCloseNotification}  
+                        type="Error"
+                        firstLine="No account exists for that email"                          
+                    />
+                </View>
+            </View>
+            <Loader 
+                visible={loadingVisible}
+                animationType="fade"
+            />  
             </KeyboardAvoidingView>
         )
     }
@@ -117,6 +118,16 @@ export default class ForgotPassword extends Component{
 const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
+        flex: 1
+    },
+    scrollViewWrapper: {
+        marginTop:70,
+        flex: 1
+    },
+    scrollView: {
+        paddingTop: 20,
+        paddingRight: 30,
+        paddingLeft: 30,
         flex: 1
     },
     forgotPasswordHeading: {

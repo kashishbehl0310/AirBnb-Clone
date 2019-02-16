@@ -7,6 +7,9 @@ import {
     StyleSheet,
     KeyboardAvoidingView,
  } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ActionCreators } from "../redux/actions";
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import InputField from "../components/forms/InputField";
@@ -14,7 +17,7 @@ import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -96,6 +99,7 @@ export default class Login extends Component {
         const showNotification = formValid ? false : true;
         const background = formValid ? colors.green01 : colors.darkOrange;
         const notificationMarginTop = showNotification ? 10: 0;
+        console.log(this.props.loggedInStatus);
         return(
             <KeyboardAvoidingView
                 style={[{backgroundColor: background}, styles.wrapper]}
@@ -183,3 +187,14 @@ const styles = StyleSheet.create({
         bottom: 0,
     }   
 })
+const mapStateToProps = (state) => {
+    return {
+        loggedInStatus: state.loggedInStatus
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
