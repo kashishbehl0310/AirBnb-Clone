@@ -24,6 +24,7 @@ class Login extends Component {
             formValid :true,
             validEmail: false,
             emailAddress: '',
+            password: '',
             validPassword: false,
             loadingVisible: false
         }
@@ -38,7 +39,8 @@ class Login extends Component {
             loadingVisible: true
         })
         setTimeout(() => {
-            if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
+            const { emailAddress, password } = this.state;
+            if(this.props.logIn(emailAddress, password)){
                 this.setState({
                     formValid:  true,
                     loadingVisible: false
@@ -49,6 +51,17 @@ class Login extends Component {
                     loadingVisible: false
                 })
             }
+            // if(this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
+            //     this.setState({
+            //         formValid:  true,
+            //         loadingVisible: false
+            //     })
+            // } else {
+            //     this.setState({
+            //         formValid: false,
+            //         loadingVisible: false
+            //     })
+            // }
         }, 2000)
     }
     handleCloseNotification(){
@@ -74,6 +87,7 @@ class Login extends Component {
         }
     }   
     handlePasswordChange(password){
+        this.setState({ password })
         if(!this.state.validPassword){
             if(password.length > 4){
                 this.setState({
